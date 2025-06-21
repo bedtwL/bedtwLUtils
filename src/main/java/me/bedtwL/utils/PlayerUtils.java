@@ -2,8 +2,10 @@ package me.bedtwL.utils;
 
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
+import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerUtils {
     public void sendTitle(Player p, String title, String subtitle, int fadeIn, int stay, int fadeOut) {
@@ -23,5 +25,9 @@ public class PlayerUtils {
             ((CraftPlayer) p).getHandle().playerConnection.sendPacket(tit);
             ((CraftPlayer) p).getHandle().playerConnection.sendPacket(length);
         }
+    }
+    public void sendActionText(Player player, String message)
+    {
+        net.minecraft.server.v1_8_R3.PacketPlayOutChat packet = new net.minecraft.server.v1_8_R3.PacketPlayOutChat(net.minecraft.server.v1_8_R3.IChatBaseComponent.ChatSerializer.a("{\"text\":\""+message+"\"}"), (byte)2); ((org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
     }
 }
